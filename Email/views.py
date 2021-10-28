@@ -1,3 +1,4 @@
+from logging import error
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from rest_framework.decorators import api_view
@@ -15,18 +16,20 @@ from Config.sms_main import send_sms
 def send_mail(request, *args, **kwargs):
         if request.method == 'POST':
             email = request.POST['email']
-            EmailModel.objects.create(
-                email=email,
-            )
+            # EmailModel.objects.create(
+            #     email=email,
+            # )
             print('email saved!')
             try:
-                prepare_email(email)
+                # prepare_email(email)
+                print(email)
+                return JsonResponse(data=email, status=200, safe=False)
             except Exception as e:
                 print("Error", e)
-            return JsonResponse(data=request.data, status=200)
+                return JsonResponse(error=e)
         
         elif request.method == 'GET':
-            return render(request, "Email/send-sms.html")
+            return render(request, "Email/send-email.html")
 
 # def send_sms(request, *args, **kwargs):
 #     # return HttpResponse("Hello World")
@@ -51,11 +54,8 @@ def send_sms(request,  *args, **kwargs):
         print('phone saved!', clean_phone)
         try:
             print(clean_phone)
-            content = {
-                "clean_phone" : clean_phone,
-            }
             # send_sms(clean_phone)
-            return HttpResponse(content)
+            return JsonResponse(data=clean_phone, status=200, safe=False)
         except Exception as e:
             print('Error', e)
     elif request.method == 'GET':

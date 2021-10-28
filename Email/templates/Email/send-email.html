@@ -4,10 +4,10 @@
 </head>
 <body>
 
-<h1>Subscribe through SMS</h1>
-<form method="POST" action="{% url 'Email:send-sms' %}">
+<h1>Subscribe through Email</h1>
+<form method="POST" action="{% url 'Email:send-email' %}">
     {% csrf_token %}
-    <input name="phone" type="text"/>
+    <input name="email" type="text"/>
     <button type="submit">Submit</button>
 </form>
 </body>

@@ -9,8 +9,14 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import os
+import os   
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
 from pathlib import Path
+
 import django_heroku, dj_database_url
 
 
@@ -80,20 +86,24 @@ WSGI_APPLICATION = 'EmailService.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+ho = os.environ.get('HOST')
+print('zxds',ho)
+
+
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('NAME'),
-        'USER': os.environ.get('USER'),
-        'PASSWORD': os.environ.get('PASSWORD'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'emmailsmsservice',
+        'USER': 'postgres',
+        'PASSWORD': 'edem1234',
         'HOST': os.environ.get('HOST'),
         'PORT': os.environ.get('PORT')
     }
 }
 
 #  Heroku DB CONFIG
-# db_from_env = dj_database_url.config(conn_max_age=600)
-# DATABASES['default'].update(db_from_env)
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -154,4 +164,4 @@ CELERY_ALWAYS_EAGER = False
 
 
 #  Django Settings COnfiguration
-# django_heroku.settings(locals())
+django_heroku.settings(locals())

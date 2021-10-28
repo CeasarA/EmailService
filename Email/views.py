@@ -21,9 +21,12 @@ def send_mail(request, *args, **kwargs):
                     email=email,
                 )
                 print('email saved!')
-                # prepare_email(email)
+                email_dict = {
+                    'email': email,
+                }
+                prepare_email(email)
                 print(email)
-                return JsonResponse(data=email, status=200, safe=False)
+                return JsonResponse(data=email_dict, status=200, safe=False)
             except Exception as e:
                 print("Error", e)
                 # return JsonResponse(data=e, safe=False)
@@ -39,10 +42,13 @@ def send_sms(request,  *args, **kwargs):
             phone=clean_phone,
         )
         print('phone saved!', clean_phone)
+        phone_dict = {
+            'phone': clean_phone,
+        }
         try:
             print(clean_phone)
-            # send_sms(clean_phone)
-            return JsonResponse(data=clean_phone, status=200, safe=False)
+            send_sms(clean_phone)
+            return JsonResponse(data=phone_dict, status=200, safe=False)
         except Exception as e:
             print('Error', e)
     elif request.method == 'GET':

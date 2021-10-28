@@ -1,0 +1,14 @@
+<html>
+<head>
+<title>Send SMS Form</title>
+</head>
+<body>
+
+<h1>Send an SMS</h1>
+<form method="POST" action="{% url 'Email:send-sms' %}">
+    {% csrf_token %}
+    <input name="phone" type="text"/>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

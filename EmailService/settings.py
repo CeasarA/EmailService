@@ -82,18 +82,18 @@ WSGI_APPLICATION = 'EmailService.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ.get('NAME'),
         'USER': os.environ.get('USER'),
         'PASSWORD': os.environ.get('PASSWORD'),
         'HOST': os.environ.get('HOST'),
-        'POST': os.environ.get('PORT')
+        'PORT': os.environ.get('PORT')
     }
 }
 
 #  Heroku DB CONFIG
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+# db_from_env = dj_database_url.config(conn_max_age=600)
+# DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -154,4 +154,4 @@ CELERY_ALWAYS_EAGER = False
 
 
 #  Django Settings COnfiguration
-django_heroku.settings(locals())
+# django_heroku.settings(locals())

@@ -2,6 +2,8 @@ from django.http.response import JsonResponse
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework import status
+from rest_framework.response import Response
+from django.http import HttpResponse
 
 from .models import EmailModel, PhoneModel
 from .serializers import EmailSerializer
@@ -25,9 +27,21 @@ def send_mail(request):
 
     return JsonResponse(data=request.data, status=200)
 
+def send_sms(request, *args, **kwargs):
+    # return HttpResponse("Hello World")
+    if request.method == 'POST':
+        phone = request.POST['phone']
+        print(phone)
+        clean_phone = '+233' + str(phone[1:])
+        PhoneModel.objects.create(
+            phone=clean_phone,
+        )
+        print('phone saved!', clean_phone)
+    elif request.method == "GET":
+        return render(request, "Email/send-sms.html")
 
 @api_view(['POST'])
-def send_sms(request):
+def send_sms(request,  *args, **kwargs):
     if request.method == 'POST':
         phone = request.data['phone']
         clean_phone = '+233' + str(phone[1:])
@@ -35,11 +49,14 @@ def send_sms(request):
             phone=clean_phone,
         )
         print('phone saved!', clean_phone)
-    try:
-        send_sms(clean_phone)
-    except Exception as e:
-        print('Error', e)
+        try:
+            print(clean_phone)
+            # send_sms(clean_phone)
+        except Exception as e:
+            print('Error', e)
 
+    elif request.method == 'GET':
+        render Response()
     return JsonResponse(data=request.data, status=status.HTTP_200_OK)
 
 

@@ -15,12 +15,12 @@ from Config.sms_main import send_sms
 # Create your views here.
 def send_mail(request, *args, **kwargs):
         if request.method == 'POST':
-            email = request.POST['email']
-            # EmailModel.objects.create(
-            #     email=email,
-            # )
-            print('email saved!')
             try:
+                email = request.POST['email']
+                EmailModel.objects.create(
+                    email=email,
+                )
+                print('email saved!')
                 # prepare_email(email)
                 print(email)
                 return JsonResponse(data=email, status=200, safe=False)

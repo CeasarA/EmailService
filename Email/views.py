@@ -42,7 +42,7 @@ def send_mail(request):
 
 def send_sms(request,  *args, **kwargs):
     if request.method == 'POST':
-        phone = request.data['phone']
+        phone = request.POST['phone']
         clean_phone = '+233' + str(phone[1:])
         PhoneModel.objects.create(
             phone=clean_phone,
@@ -50,9 +50,14 @@ def send_sms(request,  *args, **kwargs):
         print('phone saved!', clean_phone)
         try:
             print(clean_phone)
+            content = {
+                "clean_phone" : clean_phone,
+            }
             # send_sms(clean_phone)
+            return HttpResponse(content)
         except Exception as e:
             print('Error', e)
+
 
     elif request.method == 'GET':
         return render(request, "Email/send-sms.html")

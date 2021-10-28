@@ -26,7 +26,7 @@ def send_mail(request, *args, **kwargs):
                 return JsonResponse(data=email, status=200, safe=False)
             except Exception as e:
                 print("Error", e)
-                return JsonResponse(error=e)
+                # return JsonResponse(data=e, safe=False)
         
         elif request.method == 'GET':
             return render(request, "Email/send-email.html")

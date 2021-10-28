@@ -20,7 +20,7 @@ with open('./Config/email.html') as email_template:
 # Prepare an Email
 @shared_task
 def prepare_email(email):
-    subject = "Email Service Example"
+    subject = "Test Trial From Ceateck"
     # content = "Hello Buddy,\n This is test trial of the email service. I hope you do not mind!"
     doc = document
     message = Mail(from_email=MY_ADDRESS, to_emails=email, subject=subject, html_content=doc)

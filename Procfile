@@ -1,2 +1,2 @@
-waitress-serve --listen=*:8000 myapp.wsgi:application
+web: gunicorn EmailService.wsgi
 release: python manage.py migrate

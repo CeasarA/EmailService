@@ -14,7 +14,7 @@ class EmailSerializer(serializers.Serializer):
 
 
 
-class PhoneModel(serializers.Serialize):
+class PhoneModel(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     phone = serializers.CharField(allow_blank=True, required=False)
 

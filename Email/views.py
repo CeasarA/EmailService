@@ -45,4 +45,4 @@ def send_sms(request):
 
 @api_view(['GET'])
 def home(request):
-    return render("homehome")
+    return render("home friend")

@@ -23,7 +23,7 @@ def send_sms(phone):
 
     try:
         message = client.messages.create(to=phone, from_=SENDER_SMS, body=content)
-        # PARSE RESPONSE
+        # # PARSE RESPONSE
         pp = pprint.PrettyPrinter(indent=4)
 
         print("----------------------")
@@ -40,3 +40,5 @@ def send_sms(phone):
         return e
 
     return phone
+
+# send_sms('+233246789484')

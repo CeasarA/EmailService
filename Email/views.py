@@ -36,7 +36,7 @@ def send_sms(request):
         )
         print('phone saved!', clean_phone)
     try:
-        send_sms(phone)
+        send_sms(clean_phone)
     except Exception as e:
         print('Error', e)
 

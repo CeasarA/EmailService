@@ -29,7 +29,7 @@ def send_mail(request, *args, **kwargs):
                 return JsonResponse(data=email_dict, status=200, safe=False)
             except Exception as e:
                 print("Error", e)
-                # return JsonResponse(data=e, safe=False)
+                return JsonResponse(data=e)
         
         elif request.method == 'GET':
             return render(request, "Email/send-email.html")
@@ -46,12 +46,15 @@ def send_sms(request,  *args, **kwargs):
             'phone': clean_phone,
         }
         try:
+            print('clean', clean_phone)
             send_sms(clean_phone)
             return JsonResponse(data=phone_dict, status=200, safe=False)
         except Exception as e:
             print('Error', e)
+            return JsonResponse(data=e)
     elif request.method == 'GET':
         return render(request, "Email/send-sms.html")
+
 
 def home(request):
     return render(request, "Email/home.html")

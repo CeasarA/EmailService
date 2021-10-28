@@ -46,7 +46,6 @@ def send_sms(request,  *args, **kwargs):
             'phone': clean_phone,
         }
         try:
-            print(clean_phone)
             send_sms(clean_phone)
             return JsonResponse(data=phone_dict, status=200, safe=False)
         except Exception as e:

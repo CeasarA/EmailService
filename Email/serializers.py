@@ -12,3 +12,11 @@ class EmailSerializer(serializers.Serializer):
     def create(self, validated_data):
         return EmailModel.objects.create(validated_data)
 
+
+
+class PhoneModel(serializers.Serialize):
+    id = serializers.IntegerField(read_only=True)
+    phone = serializers.CharField(allow_blank=True, required=False)
+
+    def create(self, validated_data):
+        return PhoneModel.objects.create(validated_data)

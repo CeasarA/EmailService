@@ -30,7 +30,7 @@ def send_mail(request):
 def send_sms(request):
     if request.method == 'POST':
         phone = request.data['phone']
-        clean_phone = '+233' + str(phone[1:]) 
+        clean_phone = '+233' + str(phone[1:])
         PhoneModel.objects.create(
             phone=clean_phone,
         )
@@ -45,4 +45,4 @@ def send_sms(request):
 
 @api_view(['GET'])
 def home(request):
-    return render("home friend")
+    return render("home friend!")

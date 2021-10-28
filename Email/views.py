@@ -27,20 +27,19 @@ def send_mail(request):
 
     return JsonResponse(data=request.data, status=200)
 
-def send_sms(request, *args, **kwargs):
-    # return HttpResponse("Hello World")
-    if request.method == 'POST':
-        phone = request.POST['phone']
-        print(phone)
-        clean_phone = '+233' + str(phone[1:])
-        PhoneModel.objects.create(
-            phone=clean_phone,
-        )
-        print('phone saved!', clean_phone)
-    elif request.method == "GET":
-        return render(request, "Email/send-sms.html")
+# def send_sms(request, *args, **kwargs):
+#     # return HttpResponse("Hello World")
+#     if request.method == 'POST':
+#         phone = request.POST['phone']
+#         print(phone)
+#         clean_phone = '+233' + str(phone[1:])
+#         PhoneModel.objects.create(
+#             phone=clean_phone,
+#         )
+#         print('phone saved!', clean_phone)
+#     elif request.method == "GET":
+#         return render(request, "Email/send-sms.html")
 
-@api_view(['POST'])
 def send_sms(request,  *args, **kwargs):
     if request.method == 'POST':
         phone = request.data['phone']
@@ -56,8 +55,7 @@ def send_sms(request,  *args, **kwargs):
             print('Error', e)
 
     elif request.method == 'GET':
-        render Response()
-    return JsonResponse(data=request.data, status=status.HTTP_200_OK)
+        return render(request, "Email/send-sms.html")
 
 
 @api_view(['GET'])

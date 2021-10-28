@@ -12,20 +12,21 @@ from Config.email_main import prepare_email
 from Config.sms_main import send_sms
 
 # Create your views here.
-@api_view(['POST'])
-def send_mail(request):
-    if request.method == 'POST':
-        email = request.data['email']
-        EmailModel.objects.create(
-            email=email,
+def send_mail(request, *args, **kwargs):
+        if request.method == 'POST':
+            email = request.POST['email']
+            EmailModel.objects.create(
+                email=email,
             )
-        print('email saved!')
-    try:
-        prepare_email(email)
-    except Exception as e:
-        print("Error", e)
-
-    return JsonResponse(data=request.data, status=200)
+            print('email saved!')
+            try:
+                prepare_email(email)
+            except Exception as e:
+                print("Error", e)
+            return JsonResponse(data=request.data, status=200)
+        
+        elif request.method == 'GET':
+            return render(request, "Email/send-sms.html")
 
 # def send_sms(request, *args, **kwargs):
 #     # return HttpResponse("Hello World")
@@ -57,8 +58,6 @@ def send_sms(request,  *args, **kwargs):
             return HttpResponse(content)
         except Exception as e:
             print('Error', e)
-
-
     elif request.method == 'GET':
         return render(request, "Email/send-sms.html")
 

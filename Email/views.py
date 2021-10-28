@@ -53,7 +53,5 @@ def send_sms(request,  *args, **kwargs):
     elif request.method == 'GET':
         return render(request, "Email/send-sms.html")
 
-
-@api_view(['GET'])
 def home(request):
-    return render("home friend!")
+    return render(request, "Email/home.html")

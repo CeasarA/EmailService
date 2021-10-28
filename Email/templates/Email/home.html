@@ -1,0 +1,16 @@
+<html>
+<head>
+<title>Subscribe to Newsletter</title>
+</head>
+<body>
+
+<h1>Subscribe through: </h1>
+{% comment %} <form method="POST" action="{% url 'Email:send-email' %}">
+    {% csrf_token %}
+    <input name="email" type="text"/>
+    <button type="submit">Submit</button>
+</form> {% endcomment %}
+<a href='/send/email'>Email</a> <br>
+<a href='/send/sms'>Sms</a>
+</body>
+</html>

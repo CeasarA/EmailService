@@ -31,19 +31,6 @@ def send_mail(request, *args, **kwargs):
         elif request.method == 'GET':
             return render(request, "Email/send-email.html")
 
-# def send_sms(request, *args, **kwargs):
-#     # return HttpResponse("Hello World")
-#     if request.method == 'POST':
-#         phone = request.POST['phone']
-#         print(phone)
-#         clean_phone = '+233' + str(phone[1:])
-#         PhoneModel.objects.create(
-#             phone=clean_phone,
-#         )
-#         print('phone saved!', clean_phone)
-#     elif request.method == "GET":
-#         return render(request, "Email/send-sms.html")
-
 def send_sms(request,  *args, **kwargs):
     if request.method == 'POST':
         phone = request.POST['phone']

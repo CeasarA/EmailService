@@ -19,7 +19,7 @@ content = 'This is a test trial SMS from your favorite Tech Company, Ceateck'
 
 
 #  SEND AN SMS
-def send_sms(phone):
+def sending_sms(phone):
 
     try:
         message = client.messages.create(to=phone, from_=SENDER_SMS, body=content)

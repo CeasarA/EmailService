@@ -10,7 +10,7 @@ from .models import EmailModel, PhoneModel
 from .serializers import EmailSerializer
 
 from Config.email_main import prepare_email
-from Config.sms_main import send_sms
+from Config.sms_main import sending_sms
 
 # Create your views here.
 def send_mail(request, *args, **kwargs):
@@ -47,11 +47,11 @@ def send_sms(request,  *args, **kwargs):
         }
         try:
             print('clean', clean_phone)
-            send_sms(clean_phone)
+            sending_sms(clean_phone)
             return JsonResponse(data=phone_dict, status=200, safe=False)
         except Exception as e:
             print('Error', e)
-            return JsonResponse(data=e)
+            return JsonResponse(data=e, safe=False)
     elif request.method == 'GET':
         return render(request, "Email/send-sms.html")
 
